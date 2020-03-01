@@ -1,13 +1,10 @@
 package wsb.devices;
 
-public class Phone {
-    final String producer;
-    final String model;
+public class Phone extends Device {
     final Double screenSize;
 
     public Phone(String producer, String model, Double screenSize) {
-        this.producer = producer;
-        this.model = model;
+        super(producer,model);
         this.screenSize = screenSize;
     }
 }
