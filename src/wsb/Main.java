@@ -27,5 +27,7 @@ public class Main {
         dirtyOne.plates = "GDA2314";
         me.car = dirtyOne;
         System.out.println(me.car.producer + " " + me.car.model + " " + me.car.plates);
+
+        System.out.println("test");
     }
 }
