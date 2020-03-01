@@ -20,4 +20,14 @@ public class Human extends Animal{
     public Double getSalary() {
         return salary;
     }
+
+    public void sell() throws Exception {
+        throw new Exception("don't do this freak");
+    }
+
+    public void eat() throws Exception {
+        throw new Exception("don't do this freak");
+    }
+
+
 }

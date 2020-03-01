@@ -7,4 +7,9 @@ public class Phone extends Device {
         super(producer,model);
         this.screenSize = screenSize;
     }
+
+    @Override
+    public void turnOn() {
+        System.out.println("phone is turned on");
+    }
 }

@@ -1,11 +1,12 @@
 package wsb;
 
 import wsb.devices.Car;
+import wsb.devices.Device;
 import wsb.devices.Phone;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         Animal dog = new Animal("dog");
         dog.name = "Akita";
@@ -35,6 +36,14 @@ public class Main {
         System.out.println(me instanceof Human);
         System.out.println(me instanceof Object);
 
-        System.out.println(me.hashCode());
+        me.feed();
+        me.pet.feed();
+
+        iphone.turnOn();
+        dirtyOne.turnOn();
+
+        iphone.sell();
+        me.pet.sell();
+        me.sell();
     }
 }
