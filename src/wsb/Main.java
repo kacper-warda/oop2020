@@ -1,5 +1,8 @@
 package wsb;
 
+import wsb.devices.Car;
+import wsb.devices.Phone;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -28,6 +31,10 @@ public class Main {
         me.car = dirtyOne;
         System.out.println(me.car.producer + " " + me.car.model + " " + me.car.plates);
 
-        System.out.println("test");
+        System.out.println(me instanceof Animal);
+        System.out.println(me instanceof Human);
+        System.out.println(me instanceof Object);
+
+        System.out.println(me.hashCode());
     }
 }

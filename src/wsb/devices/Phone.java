@@ -1,4 +1,4 @@
-package wsb;
+package wsb.devices;
 
 public class Phone {
     final String producer;
