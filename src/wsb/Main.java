@@ -44,8 +44,15 @@ public class Main {
 
         iphone.sell();
         me.pet.sell();
-        me.sell();
 
-        System.out.println("test");
+        Human myWife = new Human();
+        myWife.firstName = "Karolina";
+        myWife.lastName = "Warda";
+        myWife.car = dirtyOne;
+
+
+        System.out.println(me.car);
+        System.out.println(me);
+
     }
 }

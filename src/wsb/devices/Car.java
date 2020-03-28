@@ -16,4 +16,8 @@ public class Car extends Device {
     public void turnOn() {
         System.out.println("car is ready to go");
     }
+
+    public String toString() {
+        return this.producer + " " + this.model + " " + this.plates;
+    }
 }
