@@ -12,6 +12,7 @@ public class Human extends Animal {
 
     protected String phoneNumber;
     private Double salary;
+    public Double cash = 200.0;
 
     public Human() {
         super("homo sapiens");

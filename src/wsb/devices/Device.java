@@ -1,8 +1,9 @@
 package wsb.devices;
 
+import wsb.Human;
 import wsb.Soldable;
 
-public abstract class Device implements Soldable {
+public abstract class Device {
         final public String producer;
         final public String model;
 
@@ -17,7 +18,4 @@ public abstract class Device implements Soldable {
         return this.model;
     }
 
-    public void sell(){
-        System.out.println("already sold");
-    }
 }

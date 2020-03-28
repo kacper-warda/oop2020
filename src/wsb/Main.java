@@ -42,8 +42,6 @@ public class Main {
         iphone.turnOn();
         dirtyOne.turnOn();
 
-        iphone.sell();
-        me.pet.sell();
 
         Human myWife = new Human();
         myWife.firstName = "Karolina";
@@ -53,6 +51,17 @@ public class Main {
 
         System.out.println(me.car);
         System.out.println(me);
+
+        Human brotherInLaw = new Human();
+        brotherInLaw.firstName = "Mateusz";
+        brotherInLaw.lastName = "Skiba";
+
+        me.car.sell(brotherInLaw, me, 100.0);
+        System.out.println("Now I have " + me.cash + "$");
+        System.out.println("Now he has " + brotherInLaw.cash + "$");
+        System.out.println("My car is now: " + me.car);
+        System.out.println("His car is now: " + brotherInLaw.car);
+
 
     }
 }

@@ -2,7 +2,7 @@ package wsb;
 
 import java.io.File;
 
-public class Animal implements Soldable, Edible {
+public class Animal implements Edible {
     final String species;
     private Double weight;
     public String name;
@@ -62,13 +62,11 @@ public class Animal implements Soldable, Edible {
     }
 
 
-    @Override
-    public void sell() throws Exception {
-        System.out.println("now gimme the money");
-    }
 
     @Override
     public void eat() throws Exception {
         System.out.println("that was yuammy");
     }
+
+
 }
