@@ -45,5 +45,7 @@ public class Main {
         iphone.sell();
         me.pet.sell();
         me.sell();
+
+        System.out.println("test");
     }
 }
