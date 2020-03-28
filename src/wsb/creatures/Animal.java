@@ -1,8 +1,8 @@
-package wsb;
+package wsb.creatures;
 
 import java.io.File;
 
-public class Animal implements Edible {
+public class Animal {
     final String species;
     private Double weight;
     public String name;
@@ -33,7 +33,7 @@ public class Animal implements Edible {
     }
 
 
-    void feed() {
+    public void feed() {
         if (weight == 0) {
             System.out.println("too late, " + name + " is dead");
         } else {
@@ -42,8 +42,8 @@ public class Animal implements Edible {
         }
     }
 
-    void takeForAWalk() {
-        if(weight == 0.0){
+    public void takeForAWalk() {
+        if (weight == 0.0) {
             System.out.println("you can't walk the street with dead animal you freak");
         } else if (weight > 3.0) {
             --weight;
@@ -61,12 +61,8 @@ public class Animal implements Edible {
         return weight;
     }
 
-
-
-    @Override
-    public void eat() throws Exception {
-        System.out.println("that was yuammy");
+    protected void kill() {
+        System.out.println("byeeeeeeeeeeeeee");
+        this.weight = 0.0;
     }
-
-
 }

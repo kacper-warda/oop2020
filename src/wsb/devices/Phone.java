@@ -1,7 +1,5 @@
 package wsb.devices;
 
-import wsb.Human;
-
 public class Phone extends Device {
     final Double screenSize;
 

@@ -1,6 +1,6 @@
 package wsb.devices;
 
-import wsb.Human;
+import wsb.creatures.Human;
 import wsb.Soldable;
 
 public class Car extends Device implements Soldable {

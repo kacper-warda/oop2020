@@ -1,4 +1,4 @@
-package wsb;
+package wsb.creatures;
 
 import wsb.devices.Car;
 import wsb.devices.Phone;

@@ -1,8 +1,5 @@
 package wsb.devices;
 
-import wsb.Human;
-import wsb.Soldable;
-
 public abstract class Device {
         final public String producer;
         final public String model;

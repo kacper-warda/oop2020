@@ -1,5 +1,9 @@
 package wsb;
 
+import wsb.creatures.Animal;
+import wsb.creatures.FarmAnimal;
+import wsb.creatures.Human;
+import wsb.creatures.Pet;
 import wsb.devices.Car;
 import wsb.devices.Device;
 import wsb.devices.Phone;
@@ -8,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        Animal dog = new Animal("dog");
+        Animal dog = new Pet("dog");
         dog.name = "Akita";
 
         Phone iphone = new Phone("Apple", "6s", 4.7);
@@ -31,10 +35,6 @@ public class Main {
         dirtyOne.plates = "GDA2314";
         me.car = dirtyOne;
         System.out.println(me.car.producer + " " + me.car.model + " " + me.car.plates);
-
-        System.out.println(me instanceof Animal);
-        System.out.println(me instanceof Human);
-        System.out.println(me instanceof Object);
 
         me.feed();
         me.pet.feed();
@@ -61,6 +61,10 @@ public class Main {
         System.out.println("Now he has " + brotherInLaw.cash + "$");
         System.out.println("My car is now: " + me.car);
         System.out.println("His car is now: " + brotherInLaw.car);
+
+//        me.pet.eat(); // that will not work
+        FarmAnimal chicken = new FarmAnimal("Chicken");
+        chicken.beEaten();
 
 
     }
