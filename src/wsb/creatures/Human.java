@@ -14,6 +14,8 @@ public class Human extends Animal {
     private Double salary;
     public Double cash = 200.0;
 
+    private static Double DEFAULT_FEED_WEIGHT = 1.5;
+
     public Human() {
         super("homo sapiens");
     }
@@ -31,7 +33,12 @@ public class Human extends Animal {
     }
 
     public String toString() {
-        return this.firstName + " " + this.lastName;
+        return this.firstName + " " + this.lastName + " I'm a human";
+    }
+
+    public void feed(){
+        System.out.println("I'm a human I will use fork and knife");
+        super.feed(DEFAULT_FEED_WEIGHT);
     }
 
 

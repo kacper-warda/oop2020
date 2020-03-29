@@ -12,6 +12,8 @@ public class Animal {
     private static Double NEW_LION_WEIGHT = 39.2;
     private static Double NEW_OTHER_ANIMAL_WEIGHT = 5.3;
 
+    private static Double DEFAULT_FEED_WEIGHT = 1.0;
+
     public Animal(String species) {
         System.out.println("we created new Animal");
         this.species = species;
@@ -32,12 +34,21 @@ public class Animal {
         }
     }
 
+    public Animal(String species, Double weight) {
+        this.weight = weight;
+        this.species = species;
+    }
+
 
     public void feed() {
+        feed(DEFAULT_FEED_WEIGHT);
+    }
+
+    public void feed(Double foodWeight) {
         if (weight == 0) {
             System.out.println("too late, " + name + " is dead");
         } else {
-            ++weight;
+            weight += foodWeight;
             System.out.println(name + " says thx for food");
         }
     }
@@ -64,5 +75,9 @@ public class Animal {
     protected void kill() {
         System.out.println("byeeeeeeeeeeeeee");
         this.weight = 0.0;
+    }
+
+    public String toString(){
+        return "Hi I'm an Animal " + this.species + " " + this.name;
     }
 }

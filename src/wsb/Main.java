@@ -8,6 +8,9 @@ import wsb.devices.Car;
 import wsb.devices.Device;
 import wsb.devices.Phone;
 
+import java.security.spec.RSAOtherPrimeInfo;
+import java.util.Arrays;
+
 public class Main {
 
     public static void main(String[] args) throws Exception {
@@ -23,21 +26,21 @@ public class Main {
         me.pet = dog;
         me.mobile = iphone;
 
-        me.pet.feed();
-        me.pet.takeForAWalk();
-        me.pet.feed();
-        me.pet.takeForAWalk();
-        me.pet.takeForAWalk();
-        me.pet.takeForAWalk();
-        me.pet.takeForAWalk();
+//        me.pet.feed();
+//        me.pet.takeForAWalk();
+//        me.pet.feed();
+//        me.pet.takeForAWalk();
+//        me.pet.takeForAWalk();
+//        me.pet.takeForAWalk();
+//        me.pet.takeForAWalk();
 
         Car dirtyOne = new Car("fiat", "bravo", 2014, 1.6);
         dirtyOne.plates = "GDA2314";
         me.car = dirtyOne;
         System.out.println(me.car.producer + " " + me.car.model + " " + me.car.plates);
 
-        me.feed();
-        me.pet.feed();
+//        me.feed();
+//        me.pet.feed();
 
         iphone.turnOn();
         dirtyOne.turnOn();
@@ -62,10 +65,17 @@ public class Main {
         System.out.println("My car is now: " + me.car);
         System.out.println("His car is now: " + brotherInLaw.car);
 
-//        me.pet.eat(); // that will not work
-        FarmAnimal chicken = new FarmAnimal("Chicken");
-        chicken.beEaten();
+        iphone.installAnApp("Google Sheets");
+        iphone.installAnApp("Google Sheets", 1.2);
+        iphone.installAnApp(new String[]{"WhatsApp", "Messenger", "facebook"});
 
+        Animal goldFish = new Animal("goldfish",0.04);
+        System.out.println(goldFish);
+
+        System.out.println(me);
+        me.feed();
 
     }
+
+
 }
