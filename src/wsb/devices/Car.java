@@ -3,7 +3,7 @@ package wsb.devices;
 import wsb.creatures.Human;
 import wsb.Soldable;
 
-public class Car extends Device implements Soldable {
+public abstract class Car extends Device implements Soldable {
     public final Integer yearOfProduction;
     public final Double sizeOfAnEngine;
     public String plates;
@@ -14,6 +14,8 @@ public class Car extends Device implements Soldable {
         this.sizeOfAnEngine = sizeOfAnEngine;
 
     }
+
+    abstract public void refuel();
 
     @Override
     public void turnOn() {

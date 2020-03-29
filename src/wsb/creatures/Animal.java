@@ -2,7 +2,7 @@ package wsb.creatures;
 
 import java.io.File;
 
-public class Animal {
+public class Animal implements Feedable{
     final String species;
     private Double weight;
     public String name;
@@ -77,7 +77,7 @@ public class Animal {
         this.weight = 0.0;
     }
 
-    public String toString(){
+    public String toString() {
         return "Hi I'm an Animal " + this.species + " " + this.name;
     }
 }

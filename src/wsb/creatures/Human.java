@@ -6,9 +6,11 @@ import wsb.devices.Phone;
 public class Human extends Animal {
     public String firstName;
     public String lastName;
-    public Animal pet;
+    public Pet pet;
     public Phone mobile;
     public Car car;
+
+    public FarmAnimal[] farmAnimals;
 
     protected String phoneNumber;
     private Double salary;
@@ -36,7 +38,7 @@ public class Human extends Animal {
         return this.firstName + " " + this.lastName + " I'm a human";
     }
 
-    public void feed(){
+    public void feed() {
         System.out.println("I'm a human I will use fork and knife");
         super.feed(DEFAULT_FEED_WEIGHT);
     }
