@@ -2,7 +2,7 @@ package wsb.creatures;
 
 import java.io.File;
 
-public class Animal implements Feedable{
+public class Animal implements Feedable, Comparable<Animal> {
     final String species;
     private Double weight;
     public String name;
@@ -79,5 +79,10 @@ public class Animal implements Feedable{
 
     public String toString() {
         return "Hi I'm an Animal " + this.species + " " + this.name;
+    }
+
+    @Override
+    public int compareTo(Animal o) {
+        return this.species.compareTo(o.species);
     }
 }

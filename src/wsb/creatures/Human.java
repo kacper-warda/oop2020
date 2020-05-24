@@ -10,16 +10,23 @@ public class Human extends Animal {
     public Phone mobile;
     public Car car;
 
-    public FarmAnimal[] farmAnimals;
+    public Animal[] farm;
 
     protected String phoneNumber;
     private Double salary;
     public Double cash = 200.0;
 
+    private static final int DEFAULT_FARM_SIZE = 3;
     private static Double DEFAULT_FEED_WEIGHT = 1.5;
 
+    public Human(Integer farmSize) {
+        super("homo sapiens");
+        farm = new Animal[farmSize];
+    }
+    
     public Human() {
         super("homo sapiens");
+        farm = new Animal[DEFAULT_FARM_SIZE];
     }
 
     public Double getSalary() {

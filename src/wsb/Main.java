@@ -6,6 +6,9 @@ import wsb.creatures.Human;
 import wsb.creatures.Pet;
 import wsb.devices.*;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) throws Exception {
@@ -15,7 +18,7 @@ public class Main {
 
         Phone iphone = new Phone("Apple", "6s", 4.7);
 
-        Human me = new Human();
+        Human me = new Human(3);
         me.firstName = "Kacper";
         me.lastName = "Warda";
         me.pet = dog;
@@ -32,7 +35,7 @@ public class Main {
         dirtyOne.turnOn();
 
 
-        Human myWife = new Human();
+        Human myWife = new Human(4);
         myWife.firstName = "Karolina";
         myWife.lastName = "Warda";
         myWife.car = new ElectricCar("Tesla", "S", 2019);
@@ -41,7 +44,7 @@ public class Main {
         System.out.println(me.car);
         System.out.println(me);
 
-        Human brotherInLaw = new Human();
+        Human brotherInLaw = new Human(2);
         brotherInLaw.firstName = "Mateusz";
         brotherInLaw.lastName = "Skiba";
 
@@ -51,15 +54,26 @@ public class Main {
         System.out.println("My car is now: " + me.car);
         System.out.println("His car is now: " + brotherInLaw.car);
 
-        System.out.println();
-        System.out.println();
-        System.out.println();
 
-        System.out.println(brotherInLaw.car);
-        System.out.println(myWife.car);
+        Scanner consoleInput = new Scanner(System.in);  // Create a Scanner object
+
+
+        System.out.println("gimme species");
+
+//        for(int i = 0; i < me.farm.length; i++){
+//            me.farm[i] = new FarmAnimal(consoleInput.nextLine());
+//        }
+
+        me.farm[0] = new Pet("dog");
+        me.farm[1] = new FarmAnimal("cow");
+        me.farm[2] = new Human(0);
+
+        Arrays.sort(me.farm);
+
+        System.out.println(me.farm[0]);
+        System.out.println(me.farm[1]);
+        System.out.println(me.farm[2]);
 
 
     }
-
-
 }

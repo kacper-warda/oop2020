@@ -28,10 +28,12 @@ public abstract class Car extends Device implements Soldable {
 
     @Override
     public void sell(Human buyer, Human seller, Double price) throws Exception {
+        //check if buyer have a space in garage
+        //check if seller have a car
         if (buyer.cash >= price) {
-            buyer.car = this;
+            buyer.car = this; //change this
             buyer.cash -= price;
-            seller.car = null;
+            seller.car = null; // and that
             seller.cash += price;
             System.out.println(seller.firstName + " sell a car (" + this.model + ") to " + buyer + " for " + price);
         } else {
