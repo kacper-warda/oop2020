@@ -8,7 +8,7 @@ public class Human extends Animal {
     public String lastName;
     public Pet pet;
     public Phone mobile;
-    public Car car;
+    public Car[] garage;
 
     public Animal[] farm;
 
@@ -17,16 +17,25 @@ public class Human extends Animal {
     public Double cash = 200.0;
 
     private static final int DEFAULT_FARM_SIZE = 3;
+    private static final int DEFAULT_GARAGE_SIZE = 3;
     private static Double DEFAULT_FEED_WEIGHT = 1.5;
+
+    public Human(Integer farmSize, Integer garageSize) {
+        super("homo sapiens");
+        this.farm = new Animal[farmSize];
+        this.garage = new Car[garageSize];
+    }
 
     public Human(Integer farmSize) {
         super("homo sapiens");
-        farm = new Animal[farmSize];
+        this.farm = new Animal[farmSize];
+        this.garage = new Car[DEFAULT_GARAGE_SIZE];
     }
-    
+
     public Human() {
         super("homo sapiens");
-        farm = new Animal[DEFAULT_FARM_SIZE];
+        this.farm = new Animal[DEFAULT_FARM_SIZE];
+        this.garage = new Car[DEFAULT_GARAGE_SIZE];
     }
 
     public Double getSalary() {
@@ -50,5 +59,30 @@ public class Human extends Animal {
         super.feed(DEFAULT_FEED_WEIGHT);
     }
 
+    public Double valueOfCars() {
+        Double value = 0.0;
+        for (Car car : garage) {
+            if (car != null) {
+                value += car.value;
+            }
+        }
+        return value;
+    }
 
+    public Car getCar(Integer index) {
+        return this.garage[index];
+    }
+
+    public void setCar(Car car, Integer index) {
+        this.garage[index] = car;
+    }
+
+    public boolean hasACar(Car newCar) {
+        for(Car car : garage){
+            if(car == newCar){
+                return true;
+            }
+        }
+        return false;
+    }
 }

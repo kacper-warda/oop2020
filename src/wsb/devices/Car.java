@@ -3,7 +3,9 @@ package wsb.devices;
 import wsb.creatures.Human;
 import wsb.Soldable;
 
-public abstract class Car extends Device implements Soldable {
+import java.util.Comparator;
+
+public abstract class Car extends Device implements Soldable, Comparable<Car> {
     public final Integer yearOfProduction;
     public final Double sizeOfAnEngine;
     public String plates;
@@ -27,17 +29,25 @@ public abstract class Car extends Device implements Soldable {
     }
 
     @Override
+    public int compareTo(Car otherCar) {
+        return this.yearOfProduction - otherCar.yearOfProduction;
+    }
+
+    @Override
     public void sell(Human buyer, Human seller, Double price) throws Exception {
-        //check if buyer have a space in garage
-        //check if seller have a car
-        if (buyer.cash >= price) {
-            buyer.car = this; //change this
-            buyer.cash -= price;
-            seller.car = null; // and that
-            seller.cash += price;
-            System.out.println(seller.firstName + " sell a car (" + this.model + ") to " + buyer + " for " + price);
-        } else {
-            throw new Exception("you don't have enough cash to buy it");
+        if(!seller.hasACar(this)){
+            throw new Exception("seller don't have a car");
         }
+        if(!buyer.hasAFreePlace()){
+            throw new Exception("bouer dont have a plase");
+        }
+        if(buyer.cash < price){
+            throw new Exception("afwfwaawfawf");
+        }
+        buyer.removeCar(this);
+        seller.addCar(this);
+        buyer.cash -= price;
+        seller.cash += price;
+        //log
     }
 }
