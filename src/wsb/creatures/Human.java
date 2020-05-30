@@ -78,11 +78,37 @@ public class Human extends Animal {
     }
 
     public boolean hasACar(Car newCar) {
-        for(Car car : garage){
-            if(car == newCar){
+        for (Car car : garage) {
+            if (car == newCar) {
                 return true;
             }
         }
         return false;
+    }
+
+    public boolean hasAFreePlace() {
+        for (int i = 0; i < garage.length; i++) {
+            if (garage[i] == null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void removeCar(Car car) {
+        for (int i = 0; i < garage.length; i++) {
+            if (garage[i] == car) {
+                garage[i] = null;
+            }
+        }
+    }
+
+    public void addCar(Car car) {
+        for (int i = 0; i < garage.length; i++) {
+            if (garage[i] == null) {
+                garage[i] = car;
+                break;
+            }
+        }
     }
 }

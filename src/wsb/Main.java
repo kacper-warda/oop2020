@@ -6,8 +6,7 @@ import wsb.creatures.Human;
 import wsb.creatures.Pet;
 import wsb.devices.*;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -54,6 +53,22 @@ public class Main {
         System.out.println("My car is now: " + me.getCar(0));
         System.out.println("His car is now: " + brotherInLaw.getCar(0));
 
+
+
+        String[] names = {"Kacper","Jakub","Artur"};
+        for(String name : names){
+            System.out.println("my name is " + name);
+        }
+
+        names = new String[4];
+
+        Set<Object> humans = new TreeSet<>();
+
+        humans.add(me);
+        humans.add(myWife);
+        humans.add(me);
+        humans.add(brotherInLaw);
+        humans.add(new Animal("dog"));
 
 
 

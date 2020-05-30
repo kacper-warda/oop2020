@@ -48,6 +48,6 @@ public abstract class Car extends Device implements Soldable, Comparable<Car> {
         seller.addCar(this);
         buyer.cash -= price;
         seller.cash += price;
-        //log
+        System.out.println("great, transaction is done");
     }
 }
