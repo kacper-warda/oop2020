@@ -1,6 +1,9 @@
 package wsb.creatures;
 
+import wsb.database.Connector;
+
 import java.io.File;
+import java.sql.SQLException;
 
 public class Animal implements Feedable, Comparable<Animal> {
     final String species;
@@ -32,11 +35,21 @@ public class Animal implements Feedable, Comparable<Animal> {
                 break;
             }
         }
+        try {
+            this.save();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public Animal(String species, Double weight) {
         this.weight = weight;
         this.species = species;
+        try {
+            this.save();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -84,5 +97,11 @@ public class Animal implements Feedable, Comparable<Animal> {
     @Override
     public int compareTo(Animal o) {
         return this.species.compareTo(o.species);
+    }
+
+    public void save() throws SQLException {
+        String sql = "insert into animal values ('" + this.species + "','" + this.name + "'," + this.weight + ");";
+        System.out.println(sql);
+        Connector.executeSQL(sql);
     }
 }
