@@ -4,6 +4,7 @@ import wsb.creatures.Animal;
 import wsb.creatures.FarmAnimal;
 import wsb.creatures.Human;
 import wsb.creatures.Pet;
+import wsb.database.Connector;
 import wsb.database.JDBCConnector;
 import wsb.devices.*;
 
@@ -13,7 +14,6 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        JDBCConnector.connect();
 
         Pet dog = new Pet("dog");
         dog.name = "Akita";
@@ -87,6 +87,9 @@ public class Main {
         System.out.println(me.mobile.isInstalled(messenger));
         System.out.println(me.mobile.isInstalled("facebook"));
         System.out.println(me.mobile.isInstalled("messenger"));
+
+
+        Connector.connect();
 
     }
 }
