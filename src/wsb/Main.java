@@ -4,6 +4,7 @@ import wsb.creatures.Animal;
 import wsb.creatures.FarmAnimal;
 import wsb.creatures.Human;
 import wsb.creatures.Pet;
+import wsb.database.JDBCConnector;
 import wsb.devices.*;
 
 import java.util.*;
@@ -11,6 +12,8 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) throws Exception {
+
+        JDBCConnector.connect();
 
         Pet dog = new Pet("dog");
         dog.name = "Akita";
@@ -26,7 +29,7 @@ public class Main {
 
         Car dirtyOne = new DieselCar("fiat", "bravo", 2014, 1.6);
         dirtyOne.plates = "GDA2314";
-        me.setCar(dirtyOne,0);
+        me.setCar(dirtyOne, 0);
         System.out.println(me.getCar(0).producer + " " + me.getCar(0).model + " " + me.getCar(0).plates);
 
 
@@ -37,7 +40,7 @@ public class Main {
         Human myWife = new Human(4);
         myWife.firstName = "Karolina";
         myWife.lastName = "Warda";
-        myWife.setCar(new ElectricCar("Tesla", "S", 2019),0);
+        myWife.setCar(new ElectricCar("Tesla", "S", 2019), 0);
 
 
         System.out.println(me.getCar(0));
@@ -54,9 +57,8 @@ public class Main {
         System.out.println("His car is now: " + brotherInLaw.getCar(0));
 
 
-
-        String[] names = {"Kacper","Jakub","Artur"};
-        for(String name : names){
+        String[] names = {"Kacper", "Jakub", "Artur"};
+        for (String name : names) {
             System.out.println("my name is " + name);
         }
 
@@ -71,7 +73,20 @@ public class Main {
         humans.add(new Animal("dog"));
 
 
+        System.out.println(me.getCar(0).value);
 
+        App facebook = new App("facebook", "latest", 0.0);
+        App spotify = new App("spotify", "2.3.41", 14.0);
+        App messenger = new App("messenger", "latest", 0.0);
+
+        me.mobile.installAnApp(facebook, me);
+        me.mobile.installAnApp(spotify, me);
+        System.out.println(me.mobile.applications);
+
+        System.out.println(me.mobile.isInstalled(facebook));
+        System.out.println(me.mobile.isInstalled(messenger));
+        System.out.println(me.mobile.isInstalled("facebook"));
+        System.out.println(me.mobile.isInstalled("messenger"));
 
     }
 }
