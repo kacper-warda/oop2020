@@ -2,7 +2,8 @@ package wsb.thread;
 
 public class RunnableCounter implements Runnable {
 
-    public static final Integer COUNT_FROM = 10;
+    public static final Integer COUNT_FROM = 3;
+    public Finisher finisher;
 
     @Override
     public void run() {
@@ -15,6 +16,8 @@ public class RunnableCounter implements Runnable {
                 e.printStackTrace();
             }
         }
+
+        finisher.finishHim();
 
     }
 }

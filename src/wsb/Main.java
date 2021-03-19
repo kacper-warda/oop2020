@@ -1,5 +1,6 @@
 package wsb;
 
+import wsb.thread.Finisher;
 import wsb.thread.RunnableCounter;
 
 import java.util.ArrayList;
@@ -12,8 +13,24 @@ public class Main {
     public static void main(String[] args)  {
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
 
-        executor.submit(new RunnableCounter());
-        executor.submit(new RunnableCounter());
+        RunnableCounter counter1 = new RunnableCounter();
+        counter1.finisher = new Finisher() {
+            @Override
+            public void finishHim() {
+                System.out.println("Scorpion Wins");
+            }
+        };
+
+        RunnableCounter counter2 = new RunnableCounter();
+        counter2.finisher = new Finisher() {
+            @Override
+            public void finishHim() {
+                System.out.println("SubZero Wins");
+            }
+        };
+
+        executor.submit(counter1);
+        executor.submit(counter2);
 
 
         executor.shutdown();
