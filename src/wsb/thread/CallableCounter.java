@@ -5,6 +5,12 @@ import java.util.concurrent.Callable;
 
 public class CallableCounter implements Callable<Double> {
     public static final Integer COUNT_FROM = 3;
+    public final String name;
+    public Finisher finisher;
+
+    public CallableCounter(String name){
+        this.name = name;
+    }
 
     @Override
     public Double call() throws Exception {

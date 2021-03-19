@@ -14,17 +14,22 @@ public class Main {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
 
+        CallableCounter counter1 = new CallableCounter("SubZero");
+        counter1.finisher = () -> System.out.println("YOU ARE FROZEN!!!");
 
-        Future<Double> future1  = executor.submit(new CallableCounter());
-        Future<Double> future2  = executor.submit(new CallableCounter());
+        CallableCounter counter2 = new CallableCounter("Scorpion");
+        counter2.finisher = () -> System.out.println("YOU ARE POISONED!!!");
 
+        Future<Double> future1 = executor.submit(counter1);
+        Future<Double> future2 = executor.submit(counter2);
 
         executor.shutdown();
-        System.out.println("Test1");
-        System.out.println(future1.get());
-        System.out.println("Test2");
-        System.out.println(future2.get());
-        System.out.println("Test3");
+
+        if (future1.get() > future2.get()) {
+            counter1.finisher.finishHim();
+        } else {
+            counter2.finisher.finishHim();
+        }
     }
 
 }
