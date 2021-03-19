@@ -10,14 +10,13 @@ import java.sql.Statement;
 import java.util.Properties;
 
 public class Connector {
-    static final String DB_URL = "jdbc:postgresql://localhost:5432/oop";
     static private Connection CONNECTION;
 
     public static void connect() throws SQLException {
         Properties props = new Properties();
         props.setProperty("user", Configuration.USER);
         props.setProperty("password", Configuration.PASS);
-        CONNECTION = DriverManager.getConnection(DB_URL, props);
+        CONNECTION = DriverManager.getConnection(Configuration.DB_URL, props);
         System.out.println("connected");
     }
 
@@ -26,6 +25,9 @@ public class Connector {
     }
 
     public static void executeSQL(String sql) throws SQLException {
+        // dodać logi
+        // dodać kesze
         CONNECTION.createStatement().execute(sql);
+        //obsługa błędów i wyjątków
     }
 }

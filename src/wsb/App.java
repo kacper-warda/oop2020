@@ -5,7 +5,7 @@ public class App {
     private String version;
     private Double price;
 
-    public App(String name, String version, Double price) {
+    public App(String name, String version, Double price)  {
         this.name = name;
         this.version = version;
         this.price = price;

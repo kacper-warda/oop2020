@@ -4,12 +4,37 @@ import wsb.database.Connector;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
+import static wsb.creatures.Animal.Species.*;
 
 public class Animal implements Feedable, Comparable<Animal> {
-    final String species;
+
+    public enum Species {
+        DOG, CAT, MONKEY, GIRAFFE, HUMAN
+
+
+    }
+
+    private class Heart {
+        double beatsPerSecond;
+        double volume;
+        boolean isBeating;
+
+        public void stopAHeart() {
+            this.beatsPerSecond = 0;
+            this.isBeating = false;
+
+        }
+    }
+
+    private final Heart heart;
+    final Species species;
     private Double weight;
     public String name;
     File pic;
+    private static Map<Long, Animal> cache = new HashMap<>();
 
     private static Double NEW_DOG_WEIGHT = 4.0;
     private static Double NEW_LION_WEIGHT = 39.2;
@@ -17,16 +42,17 @@ public class Animal implements Feedable, Comparable<Animal> {
 
     private static Double DEFAULT_FEED_WEIGHT = 1.0;
 
-    public Animal(String species) {
+    public Animal(Species species) {
         System.out.println("we created new Animal");
         this.species = species;
+        this.heart = new Heart();
 
         switch (species) {
-            case "dog": {
+            case DOG: {
                 weight = NEW_DOG_WEIGHT;
                 break;
             }
-            case "lion": {
+            case CAT: {
                 weight = NEW_LION_WEIGHT;
                 break;
             }
@@ -42,16 +68,17 @@ public class Animal implements Feedable, Comparable<Animal> {
         }
     }
 
-    public Animal(String species, Double weight) {
+    public Animal(Species species, Double weight) {
         this.weight = weight;
         this.species = species;
+        this.heart = new Heart();
+
         try {
             this.save();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
 
     public void feed() {
         feed(DEFAULT_FEED_WEIGHT);
@@ -64,6 +91,7 @@ public class Animal implements Feedable, Comparable<Animal> {
             weight += foodWeight;
             System.out.println(name + " says thx for food");
         }
+        Animal.cache.remove(1L);
     }
 
     public void takeForAWalk() {
@@ -79,6 +107,7 @@ public class Animal implements Feedable, Comparable<Animal> {
             weight = 0.0;
             System.out.println(name + " died");
         }
+        Animal.cache.remove(1L);
     }
 
     Double getWeight() {
@@ -88,6 +117,8 @@ public class Animal implements Feedable, Comparable<Animal> {
     protected void kill() {
         System.out.println("byeeeeeeeeeeeeee");
         this.weight = 0.0;
+        this.heart.stopAHeart();
+        Animal.cache.remove(1L);
     }
 
     public String toString() {
@@ -103,5 +134,25 @@ public class Animal implements Feedable, Comparable<Animal> {
         String sql = "insert into animal values ('" + this.species + "','" + this.name + "'," + this.weight + ");";
         System.out.println(sql);
         Connector.executeSQL(sql);
+
+        Animal.cache.remove(1L);
     }
+
+    static public Animal getAnAnimalFromDatabase(Long id) throws InterruptedException {
+        if (Animal.cache.containsKey(id)) {
+            return Animal.cache.get(id);
+        } else {
+            System.out.println("looking for an animal in really large table");
+            Thread.sleep(500);
+            System.out.println("joining with another big table");
+            Thread.sleep(500);
+            System.out.println("mapping some data");
+            Thread.sleep(1000);
+            System.out.println("I've got it");
+            Animal animal = new Animal(MONKEY, 15.0);
+            Animal.cache.put(id, animal);
+            return animal;
+        }
+    }
+
 }

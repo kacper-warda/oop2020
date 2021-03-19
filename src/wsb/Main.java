@@ -1,106 +1,105 @@
 package wsb;
 
-import wsb.creatures.Animal;
-import wsb.creatures.FarmAnimal;
-import wsb.creatures.Human;
-import wsb.creatures.Pet;
+import com.sun.xml.internal.ws.api.ha.StickyFeature;
+import wsb.creatures.*;
 import wsb.database.Connector;
 import wsb.database.JDBCConnector;
 import wsb.devices.*;
 
 import java.sql.ResultSet;
 import java.util.*;
+import java.util.concurrent.*;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args)  {
+        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
 
-        Connector.connect();
+        List<Future<Integer>> resultList = new ArrayList<>();
 
-        Pet dog = new Pet("dog");
-        dog.name = "Akita";
+        long start = System.currentTimeMillis();
 
-        Phone iphone = new Phone("Apple", "6s", 4.7);
+        Random random = new Random();
 
-        Human me = new Human(3);
-        me.firstName = "Kacper";
-        me.lastName = "Warda";
-        me.pet = dog;
-        me.mobile = iphone;
-
-
-        Car dirtyOne = new DieselCar("fiat", "bravo", 2014, 1.6);
-        dirtyOne.plates = "GDA2314";
-        me.setCar(dirtyOne, 0);
-        System.out.println(me.getCar(0).producer + " " + me.getCar(0).model + " " + me.getCar(0).plates);
-
-
-        iphone.turnOn();
-        dirtyOne.turnOn();
-
-
-        Human myWife = new Human(4);
-        myWife.firstName = "Karolina";
-        myWife.lastName = "Warda";
-        myWife.setCar(new ElectricCar("Tesla", "S", 2019), 0);
-
-
-        System.out.println(me.getCar(0));
-        System.out.println(me);
-
-        Human brotherInLaw = new Human(2);
-        brotherInLaw.firstName = "Mateusz";
-        brotherInLaw.lastName = "Skiba";
-
-//        me.getCar(0).sell(brotherInLaw, me, 100.0);
-        System.out.println("Now I have " + me.cash + "$");
-        System.out.println("Now he has " + brotherInLaw.cash + "$");
-        System.out.println("My car is now: " + me.getCar(0));
-        System.out.println("His car is now: " + brotherInLaw.getCar(0));
-
-
-        String[] names = {"Kacper", "Jakub", "Artur"};
-        for (String name : names) {
-            System.out.println("my name is " + name);
+        for (int i=0; i<2; i++)
+        {
+            Integer number = random.nextInt(10);
+            FactorialCalculator calculator  = new FactorialCalculator(number);
+            Future<Integer> result = executor.submit(calculator);
+            resultList.add(result);
         }
 
-        names = new String[4];
+        for(Future<Integer> future : resultList)
+        {
+            try
+            {
+                System.out.println("Future result is - " + " - " + future.get() + "; And Task done is " + future.isDone());
+            }
+            catch (InterruptedException | ExecutionException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(System.currentTimeMillis()-start);
+        //shut down the executor service now
+        executor.shutdown();
+    }
 
-        Set<Object> humans = new TreeSet<>();
+    public static String updateSomeData(String newData) throws InterruptedException {
+        System.out.println("function: validation of new data");
+        Thread.sleep(20);
+        System.out.println("function: updating data to " + newData);
+        Thread.sleep(20);
 
-        humans.add(me);
-        humans.add(myWife);
-        humans.add(me);
-        humans.add(brotherInLaw);
-        humans.add(new Animal("dog"));
+        long startTime = System.currentTimeMillis();
 
+//        Callable later = new Callable<List<Integer>>() {
+//            long start = startTime;
+//
+//            @Override
+//            public List<Integer> call() throws Exception {
+//                long time = System.currentTimeMillis();
+//
+//                System.out.println("function: looking for users that have to be notified");
+//                Thread.sleep(2000);
+//                System.out.println("function: connecting to mail api (like mailgun)");
+//                Thread.sleep(500);
+//                System.out.println("function: sending mails");
+//                Thread.sleep(10000);
+//                System.out.println(System.currentTimeMillis() - this.start);
+//                return 12312;
+//            }
+//        };
 
-        System.out.println(me.getCar(0).value);
+//        ScheduledExecutorService execService = Executors.newSingleThreadScheduledExecutor();
+//        execService.schedule(later, 1, TimeUnit.SECONDS);
 
-        App facebook = new App("facebook", "latest", 0.0);
-        App spotify = new App("spotify", "2.3.41", 14.0);
-        App messenger = new App("messenger", "latest", 0.0);
+        return "data was updated";
+    }
 
-        me.mobile.installAnApp(facebook, me);
-        me.mobile.installAnApp(spotify, me);
-        System.out.println(me.mobile.applications);
+    private static class FactorialCalculator  implements Callable<Integer>
+    {
 
-        System.out.println(me.mobile.isInstalled(facebook));
-        System.out.println(me.mobile.isInstalled(messenger));
-        System.out.println(me.mobile.isInstalled("facebook"));
-        System.out.println(me.mobile.isInstalled("messenger"));
+        private Integer number;
 
-
-        ResultSet rs = Connector.getStatement().executeQuery("SELECT * FROM animal");
-        List<Animal> animals = new LinkedList<>();
-
-        while (rs.next()) {
-            Animal animal = new Animal(rs.getString("species"), rs.getDouble("weight"));
-            animal.name = rs.getString("name");
-            animals.add(animal);
+        public FactorialCalculator(Integer number) {
+            this.number = number;
         }
 
-        System.out.println(animals);
-
+        @Override
+        public Integer call() throws Exception {
+            int result = 1;
+            if ((number == 0) || (number == 1)) {
+                result = 1;
+            } else {
+                for (int i = 2; i <= number; i++) {
+                    result *= i;
+                    TimeUnit.MILLISECONDS.sleep(20);
+                }
+            }
+            Thread.sleep(5000);
+            System.out.println("Result for number - " + number + " -> " + result);
+            return result;
+        }
     }
 }

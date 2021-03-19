@@ -21,19 +21,19 @@ public class Human extends Animal {
     private static Double DEFAULT_FEED_WEIGHT = 1.5;
 
     public Human(Integer farmSize, Integer garageSize) {
-        super("homo sapiens");
+        super(Species.HUMAN);
         this.farm = new Animal[farmSize];
         this.garage = new Car[garageSize];
     }
 
     public Human(Integer farmSize) {
-        super("homo sapiens");
+        super(Species.HUMAN);
         this.farm = new Animal[farmSize];
         this.garage = new Car[DEFAULT_GARAGE_SIZE];
     }
 
     public Human() {
-        super("homo sapiens");
+        super(Species.HUMAN);
         this.farm = new Animal[DEFAULT_FARM_SIZE];
         this.garage = new Car[DEFAULT_GARAGE_SIZE];
     }
@@ -70,10 +70,12 @@ public class Human extends Animal {
     }
 
     public Car getCar(Integer index) {
+
         return this.garage[index];
     }
 
     public void setCar(Car car, Integer index) {
+
         this.garage[index] = car;
     }
 
@@ -87,8 +89,8 @@ public class Human extends Animal {
     }
 
     public boolean hasAFreePlace() {
-        for (int i = 0; i < garage.length; i++) {
-            if (garage[i] == null) {
+        for (Car car : garage) {
+            if (car == null) {
                 return true;
             }
         }
