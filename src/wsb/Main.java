@@ -14,20 +14,10 @@ public class Main {
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
 
         RunnableCounter counter1 = new RunnableCounter();
-        counter1.finisher = new Finisher() {
-            @Override
-            public void finishHim() {
-                System.out.println("Scorpion Wins");
-            }
-        };
+        counter1.finisher = () -> System.out.println("Scorpion Wins");
 
         RunnableCounter counter2 = new RunnableCounter();
-        counter2.finisher = new Finisher() {
-            @Override
-            public void finishHim() {
-                System.out.println("SubZero Wins");
-            }
-        };
+        counter2.finisher = () -> System.out.println("SubZero Wins");
 
         executor.submit(counter1);
         executor.submit(counter2);
