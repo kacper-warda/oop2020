@@ -9,6 +9,7 @@ public class Human extends Animal {
     public Pet pet;
     public Phone mobile;
     public Car[] garage;
+    public final Gender gender;
 
     public Animal[] farm;
 
@@ -20,22 +21,36 @@ public class Human extends Animal {
     private static final int DEFAULT_GARAGE_SIZE = 3;
     private static Double DEFAULT_FEED_WEIGHT = 1.5;
 
-    public Human(Integer farmSize, Integer garageSize) {
+    public Human(Integer farmSize, Integer garageSize, Gender gender) {
         super(Species.HUMAN);
         this.farm = new Animal[farmSize];
         this.garage = new Car[garageSize];
+        this.gender = gender;
     }
 
-    public Human(Integer farmSize) {
+    public Human(Integer farmSize, Gender gender) {
         super(Species.HUMAN);
         this.farm = new Animal[farmSize];
         this.garage = new Car[DEFAULT_GARAGE_SIZE];
+        this.gender = gender;
     }
 
-    public Human() {
+    public Human(Gender gender) {
         super(Species.HUMAN);
         this.farm = new Animal[DEFAULT_FARM_SIZE];
         this.garage = new Car[DEFAULT_GARAGE_SIZE];
+        this.gender = gender;
+    }
+
+
+
+    public void sayImFirst(){
+        if(gender.equals(Gender.MAN)){
+            System.out.println("Jestem pierwszy");
+        }
+        if(gender.equals(Gender.WOMAN)){
+            System.out.println("Jestem pierwsza");
+        }
     }
 
     public Double getSalary() {
@@ -50,8 +65,9 @@ public class Human extends Animal {
         throw new Exception("don't do this freak");
     }
 
-    public String toString() {
-        return this.firstName + " " + this.lastName + " I'm a human";
+    public String toString()
+    {
+        return this.gender + " " + this.firstName + " " + this.lastName + " I'm a human";
     }
 
     public void feed() {

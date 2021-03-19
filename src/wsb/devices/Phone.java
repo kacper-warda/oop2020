@@ -6,6 +6,13 @@ import wsb.creatures.Human;
 import java.util.*;
 
 public class Phone extends Device {
+
+    enum OperatingSystem {
+        IOS, ANDROID, WINDOWS_MOBILE
+    }
+
+    private final OperatingSystem operatingSystem;
+
     final Double screenSize;
     public List<App> applications;
 
@@ -13,10 +20,28 @@ public class Phone extends Device {
         super(producer, model);
         this.screenSize = screenSize;
         applications = new LinkedList<>();
+        if (producer.equals("Apple")) {
+            this.operatingSystem = OperatingSystem.IOS;
+        } else if (producer.equals("nokia") || producer.equals("microsoft")) {
+            this.operatingSystem = OperatingSystem.WINDOWS_MOBILE;
+        } else {
+            this.operatingSystem = OperatingSystem.ANDROID;
+        }
     }
 
     @Override
     public void turnOn() {
+        switch (this.operatingSystem){
+            case IOS:
+                System.out.println("apple sign");
+                break;
+            case ANDROID:
+                System.out.println("little robot");
+                break;
+            case WINDOWS_MOBILE:
+                System.out.println("four blue rectangles");
+                break;
+        }
         System.out.println("phone is turned on");
     }
 

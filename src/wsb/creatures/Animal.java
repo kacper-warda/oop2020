@@ -36,6 +36,7 @@ public class Animal implements Feedable, Comparable<Animal> {
     File pic;
     private static Map<Long, Animal> cache = new HashMap<>();
 
+
     private static Double NEW_DOG_WEIGHT = 4.0;
     private static Double NEW_LION_WEIGHT = 39.2;
     private static Double NEW_OTHER_ANIMAL_WEIGHT = 5.3;
@@ -133,7 +134,7 @@ public class Animal implements Feedable, Comparable<Animal> {
     public void save() throws SQLException {
         String sql = "insert into animal values ('" + this.species + "','" + this.name + "'," + this.weight + ");";
         System.out.println(sql);
-        Connector.executeSQL(sql);
+//        Connector.executeSQL(sql);
 
         Animal.cache.remove(1L);
     }
