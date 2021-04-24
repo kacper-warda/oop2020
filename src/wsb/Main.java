@@ -10,6 +10,8 @@ import wsb.creatures.Pet;
 import wsb.devices.Car;
 import wsb.devices.Device;
 import wsb.devices.DieselCar;
+import wsb.generics.Container;
+import wsb.generics.SuperNumber;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -54,5 +56,20 @@ public class Main {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+
+        SuperNumber<Double> myDouble = new SuperNumber<>(3.4);
+        SuperNumber<Integer> myInteger = new SuperNumber<>(4);
+
+        System.out.println(myDouble.doubleValue());
+        System.out.println(myInteger.doubleValue());
+
+        System.out.println(myDouble.equalValues());
+        myDouble.value = 3.8456;
+        System.out.println(myDouble.equalValues());
+        myDouble.value = 3.0;
+        System.out.println(myDouble.equalValues());
+
+        System.out.println(myInteger.equalIntValues(myDouble));
+
     }
 }
