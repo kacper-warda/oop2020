@@ -1,5 +1,7 @@
 package wsb.creatures;
 
+import wsb.annotations.Init;
+import wsb.annotations.Mapped;
 import wsb.database.Connector;
 
 import java.io.File;
@@ -13,8 +15,6 @@ public class Animal implements Feedable, Comparable<Animal> {
 
     public enum Species {
         DOG, CAT, MONKEY, GIRAFFE, HUMAN
-
-
     }
 
     private class Heart {
@@ -30,8 +30,12 @@ public class Animal implements Feedable, Comparable<Animal> {
     }
 
     private final Heart heart;
+
+    @Mapped
     final Species species;
+    @Mapped
     private Double weight;
+    @Mapped
     public String name;
     File pic;
     private static Map<Long, Animal> cache = new HashMap<>();
@@ -122,11 +126,13 @@ public class Animal implements Feedable, Comparable<Animal> {
         Animal.cache.remove(1L);
     }
 
+    @Override
     public String toString() {
         return "Hi I'm an Animal " + this.species + " " + this.name;
     }
 
     @Override
+    @Init
     public int compareTo(Animal o) {
         return this.species.compareTo(o.species);
     }

@@ -1,10 +1,13 @@
 package wsb.creatures;
 
+import wsb.annotations.Mapped;
 import wsb.devices.Car;
 import wsb.devices.Phone;
 
 public class Human extends Animal {
+    @Mapped
     public String firstName;
+    @Mapped
     public String lastName;
     public Pet pet;
     public Phone mobile;

@@ -1,7 +1,9 @@
 package wsb.devices;
 
 import wsb.App;
+import wsb.annotations.Test;
 import wsb.creatures.Human;
+import wsb.annotations.*;
 
 import java.util.*;
 
@@ -11,6 +13,7 @@ public class Phone extends Device {
         IOS, ANDROID, WINDOWS_MOBILE
     }
 
+    @Test
     private final OperatingSystem operatingSystem;
 
     final Double screenSize;
@@ -44,7 +47,6 @@ public class Phone extends Device {
         }
         System.out.println("phone is turned on");
     }
-
 
     public void sell() {
         System.out.println("already sold");
